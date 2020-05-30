@@ -42,7 +42,7 @@ updateInputValue=(e)=>{
     {
       this.setState({phoneCard:!card, inputValue: '', warningText:''});
     }
-    if(card & !warn)this.giveWarning('Congratulations!');
+    if(card & !warn)this.props.landingPage(true);
   }
 goBack=()=>{
     const card = this.state.phoneCard;

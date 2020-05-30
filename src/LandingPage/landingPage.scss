@@ -1,0 +1,133 @@
+#main2{
+  width: 100%;
+  height : 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  display: block;
+}
+
+#header{
+  width:100% !important;
+  height: 56px;
+  padding: 0;
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  align-items: center;
+
+.logo{
+  margin-left: 16px;
+  font-size: 30px;
+  font-weight: 400;
+}
+.sortPart {
+  display: flex !important;
+}
+.sortbtn{
+    cursor: pointer;
+    width: 130px;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+.sortbtn2 {
+  cursor: pointer;
+  width: 130px;
+  margin-top: 10px;
+}
+}
+
+#wrap {
+  width:100% !important;
+  height: calc(100% - 56px);
+  padding: 0;
+  margin: 0px;
+  background-color: #fff;
+  display: flex;
+}
+
+#navigation {
+  width: 15%;
+  background-color: #1c3b53;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 16px;
+overflow-y: auto;
+
+  .sideBarTab {
+    height:60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 400;
+  }
+}
+
+#landing {
+  width: 85%;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: flex-start;
+  padding: 36px;
+  flex-wrap: wrap;
+overflow-y: auto;
+
+  .Card {
+    width: 35%;
+    min-height: 120px;
+    background-color: #d3dfec;
+    margin: 0px 64px 36px 0px;
+    border-radius: 12px;
+    display: flex;
+    cursor: pointer;
+      }
+          .leftCard {
+            width: 30%;
+            height: 100%;
+            background-color: #1c3b53;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .rightCard {
+            width: 70%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-left: 12px;
+          }
+
+  .enrollmentCount{
+    color: #fff;
+    font-size: 48px;
+    font-weight: 600;
+    margin: 25px 0 5px;
+  }
+  .enrollment{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 5px 0 10px;
+  }
+.details {
+  padding: 10px 0;
+  .detailsHeader{
+    color: #191e22;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .detailsSubtext{
+    color: #191e22;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+}
