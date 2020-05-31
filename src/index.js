@@ -18,6 +18,6 @@ export class Home  extends React.Component{
 
   render(){
     return(
-    <div id="home">{!this.state.landing?<LandingPage phone={this.state.phone} otp={this.state.otp}/>: <LoginPage landingPage={this.updateItem}/>}</div>);
+    <div id="home">{this.state.landing?<LandingPage phone={this.state.phone} otp={this.state.otp}/>: <LoginPage landingPage={this.updateItem}/>}</div>);
 }}
 ReactDOM.render(<Home />, document.getElementById('root'));
