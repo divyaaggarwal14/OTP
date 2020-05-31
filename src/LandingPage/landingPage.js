@@ -1,18 +1,8 @@
 import React from 'react';
 //import ReactDOM from 'react-dom';
 import './landingPage.scss';
-//import Select from 'react-select';
 import {dummyData} from './../dummyData.js';
-// import logo from '../components/dummyLogo.png';
 
-// const sortBy = [
-//   { value: 'name', label: 'name' },
-//   { value: 'subject', label: 'subject' },
-// ];
-// const options = [
-//   { value: 'Highest to lowest', label: 'Highest to lowest' },
-//   { value: 'Lowest to highest', label: 'Lowest to highest' },
-// ];
 export default class LandingPage extends React.Component{
   constructor(props) {
     super(props);
@@ -28,19 +18,23 @@ export default class LandingPage extends React.Component{
           {tab:'Settings'},
            {tab:'Privacy Policy'},
            {tab:'Sign out'},
-     ]
+     ],
+     sortDropdown: false,
+     selectedSortType:null,
+     order:'ASC',
     }
   }
 componentDidMount(){
 this.setData();
 }
+
 setData=()=>{
   this.setState({data:dummyData[this.props.phone]});
 }
 displaySideBar=(item,index)=>{
   return(
     <div className="sideBarTab">
-    <div className="sideBarText">{item.tab}</div>
+    {this.state.activeTab==='Dashboard'&&item.tab===this.state.activeTab?<div className="sideBarTextLight">{item.tab}</div>:<div className="sideBarText">{item.tab}</div>}
     </div>
   );
 }
@@ -66,60 +60,51 @@ displayCards=(item,index)=>{
 
   );
 }
-handleChange = (selectedOption) => {
-   this.setState({ selectedOption });
-   console.log(selectedOption);
-   if(selectedOption.value ==='name'){this.sortLowToHigh(selectedOption.value)}
-   else if (selectedOption.value ==='subject'){this.sortLowToHigh(selectedOption.value)}
+ changeState=()=>{
+   const sortDropdown=this.state.sortDropdown;
+   this.setState({sortDropdown:!sortDropdown});
  }
- handleChangeOrder = (selectedOrderOption) => {
-    this.setState({ selectedOrderOption });
-    const selectedOption=this.state.selectedOption;
-     console.log(selectedOption,'f');
-    if(selectedOrderOption.value ==='Lowest to highest'){this.sortLowToHigh(selectedOption.value)}
-     else if (selectedOrderOption.value ==='Highest to lowest'){this.sortHighToLow(selectedOption.value)}
-  }
-  sortLowToHigh=(val)=>{
-        const data = this.state.data;
-         const temArr= data.sort(function (a, b) {
-        return a[val] - b[val];
-     });
-     console.log(temArr);
-  this.setState({ data: temArr });}
+ selectedType=(val)=>{
+   console.log(val);
+   this.sortFunction(val);
+   this.setState({selectedSortType:val});
+ }
 
-
-  sortHighToLow=(val)=>{
-      const data = this.state.data;
-    const temArr=data.sort(function (a, b) {
-        return b[val] - a[val];
-     });
- this.setState({ products: temArr });}
-
-
+sortFunction=(val)=>{
+  const data =this.state.data;
+  if(val!=='enrollments'){
+data.sort((a,b) => (a[val] > b[val]) ? 1 : ((b[val] > a[val]) ? -1 : 0));
+}
+else {
+ data.forEach((item, i) => {
+   item.enrollments=item.students.length;
+ });
+data.sort((a,b) => (a[val] > b[val]) ? 1 : ((b[val] > a[val]) ? -1 : 0));
+}
+this.setState({data});
+}
+showDropdown=()=>{
+  return(<div className="dropdown">
+    <ul onClick={()=>this.changeState()}>
+      <li onClick={()=>this.selectedType('name')}>Name</li>
+      <li onClick={()=>this.selectedType('subject')}>Subject</li>
+        <li onClick={()=>this.selectedType('enrollments')}>Enrollments</li>
+    </ul>
+  </div>);
+}
   render(){
     return(
     <div id="main2">
     <div id="header">
     <div className="logo">LOGO</div>
-     {/*<div id="sortPart">
-          <Select
-          className ='sortbtn'
-         value={this.state.selectedOption}
-         onChange={this.handleChange}
-         options={sortBy}
-       />
-       <Select
-           className ='sortbtn2'
-          value={this.state.selectedOrderOption}
-          onChange={this.handleChangeOrder}
-          options={options}
-        />
-     </div>*/}
+    <div className="hello">Hello, User!</div>
     </div>
     <div id="wrap">
        <div id="navigation">{this.state.navigationBar.map(this.displaySideBar)}</div>
        <div id="landing">
-       {this.state.data.map(this.displayCards)}
+        <div className="sortCard" onClick={()=>this.changeState()}>SORT BY: {this.state.selectedSortType?this.state.selectedSortType.toUpperCase():''}</div>
+        {this.state.sortDropdown?this.showDropdown():<div className="noDropdown"/>}
+       <div className="landingCard">{this.state.data.map(this.displayCards)}</div>
        </div>
       </div>
   </div>
